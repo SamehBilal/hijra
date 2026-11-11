@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="60px" height="60px" viewBox="0 0 60 60">
+  <!-- travel marker, points along +x; the map rotates it to follow the route -->
+  <circle cx="30" cy="30" r="22" fill="#0f6b55" opacity="0.18"/>
+  <circle cx="30" cy="30" r="14" fill="#0f6b55" stroke="#fdf8ec" stroke-width="3"/>
+  <path d="M24 22 L39 30 L24 38 L27 30 Z" fill="#fdf8ec"/>
+</svg>

@@ -1,0 +1,374 @@
+/* The Hijra – styles adapted from Codrops "Interactive Storytelling" */
+
+:root {
+	--ink: #3d3a32;
+	--ink-soft: #6e6656;
+	--ink-faint: #a8956c;
+	--accent: #0f6b55;
+	--accent-soft: #3f8f78;
+	--gold: #b8893a;
+	--night: #121a2b;
+	--paper: #faf4e6;
+	/* Amiri sits second so Arabic characters such as ﷺ fall back to it */
+	--serif: 'Cormorant Garamond', 'Amiri', Baskerville, 'Hoefler Text', Garamond, 'Times New Roman', serif;
+	--sans: 'Source Sans 3', 'Amiri', 'Avenir Next', Avenir, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+	--arabic: 'Amiri', 'Traditional Arabic', serif;
+}
+
+*,
+*:after,
+*:before {
+	box-sizing: border-box;
+}
+
+body {
+	font-family: var(--sans);
+	color: var(--ink);
+	background: #fff;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+a {
+	text-decoration: none;
+	color: var(--accent);
+	outline: none;
+}
+
+a:hover,
+a:focus {
+	color: var(--accent-soft);
+}
+
+[lang="ar"] {
+	font-family: var(--arabic);
+}
+
+/* Canvas container */
+
+.container {
+	position: fixed;
+	z-index: -1;
+	top: 0;
+	left: 0;
+}
+
+/* Header */
+
+.story-header {
+	position: relative;
+	z-index: 1000;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	height: 100vh;
+	min-height: 600px;
+	padding: 2em 1em 4em;
+	text-align: center;
+	color: #f6efdc;
+	background: var(--night) url(../img/story/header.svg) no-repeat center bottom;
+	background-size: cover;
+}
+
+.header-title {
+	position: relative;
+	margin: 0;
+	font-weight: 400;
+}
+
+.header-title__arabic {
+	display: block;
+	font-size: 1.6em;
+	line-height: 1.4;
+	color: #e9cf8f;
+	margin-bottom: 0.1em;
+}
+
+.header-title__main {
+	display: block;
+	font-family: var(--serif);
+	font-size: 3.4em;
+	font-weight: 500;
+	line-height: 1;
+	margin: 0 0 0.15em;
+}
+
+.header-title__part {
+	font-family: var(--serif);
+	font-size: 0.85em;
+	font-weight: 500;
+	display: block;
+	padding: 0.5em 0 2em;
+	text-indent: 4px;
+	letter-spacing: 4px;
+	text-transform: uppercase;
+	color: #e9cf8f;
+}
+
+.header-title__part::before,
+.header-title__part::after {
+	content: '\2014';
+	padding: 0 0.5em;
+}
+
+.header-title__sub {
+	font-size: 0.5em;
+	font-weight: normal;
+	line-height: 1.6;
+	display: block;
+	max-width: 640px;
+	margin: 0 auto;
+	padding: 0.5em 0 1em;
+	color: #cfc8b8;
+}
+
+.scroll-hint {
+	position: absolute;
+	bottom: 2.5em;
+	left: 50%;
+	width: 22px;
+	height: 36px;
+	margin-left: -11px;
+	border: 2px solid rgba(246, 239, 220, 0.6);
+	border-radius: 12px;
+}
+
+.scroll-hint::after {
+	content: '';
+	position: absolute;
+	top: 6px;
+	left: 50%;
+	width: 4px;
+	height: 8px;
+	margin-left: -2px;
+	border-radius: 2px;
+	background: #e9cf8f;
+	animation: scrollhint 1.8s ease-in-out infinite;
+}
+
+@keyframes scrollhint {
+	0% { transform: translateY(0); opacity: 1; }
+	70% { transform: translateY(12px); opacity: 0; }
+	100% { transform: translateY(0); opacity: 0; }
+}
+
+/* Intro quote */
+
+.intro {
+	font-family: var(--serif);
+	font-size: 2em;
+	position: relative;
+	z-index: 1000;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	height: 120vh;
+	margin: 0 0 3em;
+	padding: 3em;
+	text-align: center;
+	color: #f6efdc;
+	background: linear-gradient(var(--night), #1d2236 70%, #2a2a3a);
+}
+
+.intro blockquote {
+	max-width: 800px;
+	margin: 0 auto;
+}
+
+.intro em {
+	font-size: 1.5em;
+}
+
+.intro span {
+	display: block;
+	padding: 1em 0;
+	font-family: var(--sans);
+	font-size: 0.45em;
+	letter-spacing: 3px;
+	text-transform: uppercase;
+	color: #8f8a7c;
+}
+
+/* Story */
+
+.text {
+	position: relative;
+	z-index: 1000;
+	padding: 5em 3em;
+}
+
+.text section {
+	font-size: 1.2em;
+	line-height: 1.7;
+}
+
+.text section h2 {
+	font-size: 2.7em;
+	font-weight: 400;
+	margin: 0;
+	text-align: left;
+}
+
+.text section:not(:first-child) h2 {
+	padding: 2em 0 0 0;
+}
+
+.title-up {
+	font-family: var(--sans);
+	font-size: 0.32em;
+	font-weight: 600;
+	display: block;
+	letter-spacing: 6px;
+	text-transform: uppercase;
+	color: var(--gold);
+}
+
+.title-up [lang="ar"] {
+	font-size: 1.35em;
+	letter-spacing: 0;
+	text-transform: none;
+}
+
+.title-down {
+	font-family: var(--serif);
+	font-size: 1.3em;
+	font-weight: 600;
+	line-height: 1;
+	display: block;
+	padding: 0.15em 0 0.35em;
+	color: #2f3a33;
+}
+
+.text figure {
+	margin: 1em 0 2em;
+}
+
+.text figure img {
+	display: block;
+	width: 100%;
+	max-width: 100%;
+	height: auto;
+	border-radius: 4px;
+	box-shadow: 0 10px 30px -12px rgba(60, 45, 20, 0.35);
+}
+
+.text figcaption {
+	font-size: 0.85em;
+	font-style: italic;
+	padding: 1em 1.5em 0;
+	text-align: center;
+	color: var(--ink-soft);
+}
+
+.text section p {
+	font-size: 0.95em;
+	margin: 0.5em 0 1.5em;
+}
+
+.text section p.text-intro {
+	font-family: var(--serif);
+	font-size: 1.4em;
+	font-style: italic;
+	line-height: 1.45;
+	margin: 0.5em 0 1.25em;
+	text-align: left;
+	color: #8a7d62;
+}
+
+.text blockquote {
+	font-family: var(--serif);
+	font-size: 2em;
+	line-height: 1.4;
+	position: relative;
+	margin: 1.2em 0 1.2em 1.5em;
+	text-align: left;
+	color: #7d8a80;
+}
+
+.text blockquote::before {
+	content: '\201C';
+	font-size: 2.5em;
+	font-style: italic;
+	line-height: 1;
+	position: absolute;
+	top: -0.15em;
+	right: 100%;
+	margin: 0 0.075em 0 0;
+	color: #e8dcc0;
+}
+
+.text blockquote span {
+	font-family: var(--sans);
+	font-size: 0.45em;
+	white-space: nowrap;
+	color: var(--ink-faint);
+}
+
+.js-section {
+	width: 50%;
+	max-width: 680px;
+}
+
+/* Sources */
+
+.content--credits {
+	position: relative;
+	z-index: 1000;
+	padding: 8em 2em;
+	text-align: center;
+	color: #d9d2c0;
+	background: var(--night);
+}
+
+.content--credits h3 {
+	font-family: var(--serif);
+	font-size: 2em;
+	font-weight: 500;
+	margin: 0 0 1em;
+	color: #f6efdc;
+}
+
+.content--credits p {
+	max-width: 760px;
+	margin: 0 auto 1.2em;
+	line-height: 1.7;
+}
+
+.content--credits a {
+	color: #e9cf8f;
+}
+
+.credits-small {
+	font-size: 0.85em;
+	color: #8f8a7c;
+}
+
+@media (max-width: 720px) {
+	.header-title {
+		font-size: 1.4em;
+	}
+	.intro {
+		font-size: 1.25em;
+		height: auto;
+		min-height: 80vh;
+		padding: 1em;
+	}
+	.text {
+		font-size: 0.85em;
+		padding: 2em 1em;
+	}
+	.text section h2 {
+		font-size: 1.85em;
+	}
+	.text blockquote {
+		font-size: 1.45em;
+	}
+	.js-section {
+		width: 100%;
+		max-width: none;
+		padding: 1em;
+		background: rgba(250, 244, 230, 0.92);
+	}
+}

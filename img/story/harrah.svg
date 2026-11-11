@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="800" height="500">
+  <defs>
+    <linearGradient id="s" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#f8e9c8"/><stop offset="1" stop-color="#fff7e6"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="500" fill="url(#s)"/>
+  <circle cx="400" cy="70" r="36" fill="#fff9e8"/>
+  <!-- Mount Uhud on the horizon -->
+  <path d="M420 250 L480 190 L530 215 L580 170 L650 210 L720 190 L800 240 L800 260 L420 260Z" fill="#c98f6a" opacity="0.65"/>
+  <!-- palm groves of Yathrib in the haze -->
+  <g fill="#8aa07a" opacity="0.75">
+    <path d="M0 260 C60 240 160 250 260 240 C340 232 420 250 520 242 C620 234 720 250 800 245 L800 280 L0 280Z"/>
+  </g>
+  <g stroke="#6f8661" stroke-width="3" fill="none" opacity="0.8">
+    <path d="M90 250 v-38 M90 212 c-14 -6 -24 0 -30 8 M90 212 c14 -6 24 0 30 8 M90 212 c-6 -12 -2 -20 6 -24 M90 212 c8 -10 16 -10 22 -6"/>
+    <path d="M220 246 v-46 M220 200 c-14 -6 -24 0 -30 8 M220 200 c14 -6 24 0 30 8 M220 200 c-6 -12 -2 -20 6 -24 M220 200 c8 -10 16 -10 22 -6"/>
+    <path d="M330 244 v-34 M330 210 c-12 -5 -20 0 -26 7 M330 210 c12 -5 20 0 26 7 M330 210 c-5 -10 -2 -17 5 -20"/>
+    <path d="M560 244 v-40 M560 204 c-14 -6 -24 0 -30 8 M560 204 c14 -6 24 0 30 8 M560 204 c-6 -12 -2 -20 6 -24"/>
+  </g>
+  <!-- black basalt of the harrah in the foreground -->
+  <path d="M0 300 C120 280 240 310 380 292 C520 274 660 300 800 286 L800 500 L0 500Z" fill="#4a3f3a"/>
+  <path d="M0 380 C160 350 330 390 520 360 C640 342 740 356 800 350 L800 500 L0 500Z" fill="#352d2a"/>
+  <g fill="#5c514b">
+    <ellipse cx="80" cy="330" rx="30" ry="9"/><ellipse cx="260" cy="320" rx="22" ry="7"/><ellipse cx="470" cy="318" rx="34" ry="10"/>
+    <ellipse cx="690" cy="315" rx="26" ry="8"/><ellipse cx="160" cy="420" rx="40" ry="12"/><ellipse cx="600" cy="410" rx="44" ry="13"/>
+    <ellipse cx="380" cy="440" rx="30" ry="9"/>
+  </g>
+  <!-- heat shimmer -->
+  <g stroke="#ffffff" stroke-width="2" fill="none" opacity="0.5" stroke-linecap="round">
+    <path d="M120 285 q20 -6 40 0 t40 0"/><path d="M420 280 q20 -6 40 0 t40 0"/><path d="M640 282 q20 -6 40 0 t40 0"/>
+  </g>
+</svg>

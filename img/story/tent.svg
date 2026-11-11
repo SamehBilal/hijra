@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="800" height="500">
+  <defs>
+    <linearGradient id="s" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#c98a64"/><stop offset="0.5" stop-color="#eab785"/><stop offset="1" stop-color="#f5dcb4"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="500" fill="url(#s)"/>
+  <circle cx="620" cy="250" r="54" fill="#f9d79c" opacity="0.9"/>
+  <path d="M0 290 C180 260 360 285 520 270 C640 260 730 270 800 262 L800 500 L0 500Z" fill="#d9a873"/>
+  <path d="M0 380 C200 350 420 380 800 350 L800 500 L0 500Z" fill="#c8945e"/>
+  <!-- Bedouin goat-hair tent -->
+  <path d="M120 360 L170 250 L250 280 L330 240 L410 280 L470 250 L520 360 Z" fill="#3b2a22"/>
+  <path d="M170 250 L250 280 L330 240 L410 280 L470 250" fill="none" stroke="#5a4033" stroke-width="5"/>
+  <path d="M250 280 L250 360 M410 280 L410 360" stroke="#2a1d17" stroke-width="4"/>
+  <path d="M265 300 L395 300 L395 360 L265 360 Z" fill="#20160f"/>
+  <path d="M120 360 L70 384 M520 360 L580 386 M170 250 L110 300 M470 250 L540 296" stroke="#5a4033" stroke-width="2"/>
+  <g stroke="#d8c3a0" stroke-width="2"><path d="M180 300 h50 M180 320 h50 M430 300 h50 M430 320 h50"/></g>
+  <!-- a lean ewe -->
+  <g transform="translate(600 360)" fill="#efe6d6">
+    <ellipse cx="0" cy="0" rx="44" ry="24"/>
+    <path d="M36 -10 C50 -30 70 -28 74 -14 C76 -4 66 2 54 0 Z"/>
+    <path d="M62 -26 L78 -34 L70 -22 Z" fill="#d9cbb4"/>
+    <circle cx="66" cy="-18" r="2" fill="#2a2420"/>
+    <path d="M-30 18 v30 M-14 20 v30 M14 20 v30 M30 18 v30" stroke="#d9cbb4" stroke-width="7" stroke-linecap="round"/>
+  </g>
+  <!-- the milk bowl -->
+  <path d="M480 412 C484 440 556 440 560 412 Z" fill="#7a5233"/>
+  <ellipse cx="520" cy="412" rx="40" ry="8" fill="#fbf6ea"/>
+</svg>

@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="800" height="500">
+  <defs>
+    <linearGradient id="s" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#f4e4c4"/><stop offset="1" stop-color="#fbf2df"/>
+    </linearGradient>
+    <radialGradient id="pit" cx="0.5" cy="0.4" r="0.6">
+      <stop offset="0" stop-color="#9c7a4c"/><stop offset="1" stop-color="#d9b984"/>
+    </radialGradient>
+  </defs>
+  <rect width="800" height="500" fill="url(#s)"/>
+  <circle cx="660" cy="80" r="40" fill="#fff4d6"/>
+  <circle cx="660" cy="80" r="70" fill="#fff4d6" opacity="0.35"/>
+  <path d="M0 200 C160 170 320 210 480 185 C620 165 720 185 800 175 L800 500 L0 500Z" fill="#e9cf9f"/>
+  <path d="M0 290 C200 250 380 300 560 265 C680 242 750 255 800 250 L800 500 L0 500Z" fill="#dfc08b"/>
+  <!-- hoofprints approaching, then sinking -->
+  <g fill="#b8935f">
+    <path d="M60 470 a14 10 0 1 1 1 0z"/><path d="M110 445 a13 9 0 1 1 1 0z"/>
+    <path d="M160 425 a12 8.5 0 1 1 1 0z"/><path d="M208 406 a11 8 0 1 1 1 0z"/>
+    <path d="M254 390 a10 7.5 0 1 1 1 0z"/><path d="M298 376 a10 7 0 1 1 1 0z"/>
+  </g>
+  <!-- the place where the legs sank -->
+  <ellipse cx="420" cy="360" rx="120" ry="42" fill="url(#pit)"/>
+  <ellipse cx="420" cy="352" rx="78" ry="22" fill="#8a6a40" opacity="0.55"/>
+  <g stroke="#c7a46e" stroke-width="3" fill="none" stroke-linecap="round" opacity="0.8">
+    <path d="M300 360 C340 330 500 330 540 360"/><path d="M280 380 C340 410 500 410 560 380"/>
+  </g>
+  <!-- rising dust -->
+  <g fill="#efe0c1" opacity="0.8">
+    <circle cx="380" cy="300" r="26"/><circle cx="420" cy="282" r="32"/><circle cx="466" cy="300" r="24"/>
+    <circle cx="440" cy="250" r="20"/><circle cx="400" cy="256" r="16"/>
+  </g>
+</svg>

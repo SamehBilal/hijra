@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="800" height="500">
+  <defs>
+    <linearGradient id="s" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#cfe3df"/><stop offset="1" stop-color="#f6eedb"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="500" fill="url(#s)"/>
+  <!-- palms behind -->
+  <g stroke="#6f8661" stroke-width="5" fill="none" stroke-linecap="round">
+    <path d="M90 300 C92 240 96 200 100 150"/><path d="M100 150 c-30 -10 -55 0 -70 18 M100 150 c30 -12 56 -4 72 14 M100 150 c-14 -26 -6 -46 12 -56 M100 150 c18 -22 40 -22 54 -12 M100 150 c-28 -24 -52 -22 -66 -10"/>
+    <path d="M710 300 C708 250 704 210 698 170"/><path d="M698 170 c-30 -10 -55 0 -70 18 M698 170 c30 -12 56 -4 72 14 M698 170 c-14 -26 -6 -46 12 -56 M698 170 c18 -22 40 -22 54 -12"/>
+  </g>
+  <!-- ground -->
+  <rect y="400" width="800" height="100" fill="#e3cfa3"/>
+  <!-- mud-brick enclosure walls -->
+  <path d="M150 400 L150 290 L650 290 L650 400 Z" fill="#c9a578"/>
+  <g stroke="#b28d61" stroke-width="2">
+    <path d="M150 312 H650 M150 334 H650 M150 356 H650 M150 378 H650"/>
+    <path d="M190 290 v22 M260 290 v22 M330 290 v22 M400 290 v22 M470 290 v22 M540 290 v22 M610 290 v22 M225 312 v22 M295 312 v22 M365 312 v22 M435 312 v22 M505 312 v22 M575 312 v22"/>
+  </g>
+  <!-- palm-trunk pillars holding a roof of palm fronds -->
+  <path d="M130 250 L670 250 L650 290 L150 290 Z" fill="#9c8452"/>
+  <g stroke="#7d6a3e" stroke-width="2.5" fill="none">
+    <path d="M140 262 c30 -8 60 8 90 0 c30 -8 60 8 90 0 c30 -8 60 8 90 0 c30 -8 60 8 90 0 c30 -8 60 8 90 0 c30 -8 60 8 90 0"/>
+    <path d="M150 276 c30 -8 60 8 90 0 c30 -8 60 8 90 0 c30 -8 60 8 90 0 c30 -8 60 8 90 0 c30 -8 60 8 90 0 c30 -8 60 8 80 0"/>
+  </g>
+  <!-- open entrance showing trunks inside -->
+  <path d="M340 400 L340 320 Q400 300 460 320 L460 400 Z" fill="#5a4630"/>
+  <g fill="#8a6e48"><rect x="358" y="326" width="10" height="74"/><rect x="395" y="318" width="10" height="82"/><rect x="432" y="326" width="10" height="74"/></g>
+</svg>

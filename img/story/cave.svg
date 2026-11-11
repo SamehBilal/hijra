@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="800" height="500">
+  <defs>
+    <linearGradient id="s" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#e9c99a"/><stop offset="1" stop-color="#f6e6c8"/>
+    </linearGradient>
+    <radialGradient id="dark" cx="0.5" cy="0.6" r="0.6">
+      <stop offset="0" stop-color="#120d0b"/><stop offset="1" stop-color="#2d211b"/>
+    </radialGradient>
+  </defs>
+  <rect width="800" height="500" fill="url(#s)"/>
+  <!-- rock face -->
+  <path d="M0 500 L0 120 C80 80 160 110 230 70 C320 20 420 60 520 40 C620 20 720 70 800 60 L800 500Z" fill="#8a6a50"/>
+  <path d="M0 500 L0 200 C120 170 220 190 300 160 C420 120 560 150 680 120 C740 105 780 120 800 115 L800 500Z" fill="#7a5c45"/>
+  <path d="M40 260 L120 240 M600 200 L690 180 M500 420 L620 400 M90 420 L200 400 M680 330 L770 310" stroke="#6a4f3b" stroke-width="4" stroke-linecap="round"/>
+  <!-- the narrow cave mouth -->
+  <path d="M290 430 C280 330 320 250 400 240 C480 232 525 320 515 430 Z" fill="url(#dark)"/>
+  <path d="M290 430 C280 330 320 250 400 240 C480 232 525 320 515 430" fill="none" stroke="#5b4334" stroke-width="10"/>
+  <!-- spider web across the entrance -->
+  <g stroke="#f4efe6" stroke-width="1.4" fill="none" opacity="0.85">
+    <path d="M402 330 L310 260 M402 330 L402 245 M402 330 L500 270 M402 330 L515 350 M402 330 L470 430 M402 330 L330 430 M402 330 L290 360"/>
+    <path d="M375 309 L402 296 L428 312 L436 337 L420 360 L388 362 L366 344 Z"/>
+    <path d="M350 290 L402 270 L456 296 L470 343 L440 390 L372 393 L340 353 Z"/>
+    <path d="M326 272 L402 254 L482 283 L500 347 L458 418 L352 420 L312 358 Z"/>
+  </g>
+  <!-- dove nest on a ledge -->
+  <path d="M540 300 C560 285 640 285 660 300 L650 312 L550 312 Z" fill="#6b5039"/>
+  <path d="M556 300 C575 286 625 286 644 300" fill="none" stroke="#a88a5c" stroke-width="5"/>
+  <g transform="translate(600 272)">
+    <path d="M-26 14 C-24 -4 -6 -14 12 -10 C22 -8 26 0 24 8 L36 4 L30 14 Z" fill="#ebe7df"/>
+    <circle cx="16" cy="-8" r="9" fill="#ebe7df"/>
+    <circle cx="19" cy="-10" r="1.6" fill="#2a2420"/>
+    <path d="M24 -8 L31 -6 L24 -4 Z" fill="#c98f62"/>
+    <path d="M-20 6 C-8 -6 6 -4 10 4" fill="none" stroke="#c9c3b8" stroke-width="2"/>
+  </g>
+  <rect y="430" width="800" height="70" fill="#6a4f3b"/>
+</svg>
