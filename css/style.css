@@ -67,8 +67,45 @@ a:focus {
 	padding: 2em 1em 4em;
 	text-align: center;
 	color: #f6efdc;
-	background: var(--night) url(../img/story/header.svg) no-repeat center bottom;
+	background: var(--night) url(../img/photos/jabal-thawr.jpg) no-repeat center center;
 	background-size: cover;
+}
+
+.story-header::before {
+	content: '';
+	position: absolute;
+	inset: 0;
+	background: linear-gradient(rgba(12, 18, 33, 0.55), rgba(12, 18, 33, 0.35) 45%, rgba(12, 18, 33, 0.85));
+}
+
+.photo-credit-header {
+	position: absolute;
+	right: 1.5em;
+	bottom: 1em;
+	font-size: 0.7em;
+	color: rgba(246, 239, 220, 0.55);
+}
+
+.photo-credit-header a {
+	color: inherit;
+}
+
+.lang-switch {
+	position: absolute;
+	z-index: 2;
+	top: 1.5em;
+	right: 1.5em;
+	padding: 0.35em 0.9em;
+	border: 1px solid rgba(233, 207, 143, 0.6);
+	border-radius: 2em;
+	font-size: 0.95em;
+	color: #e9cf8f;
+}
+
+.lang-switch:hover,
+.lang-switch:focus {
+	color: #fff;
+	border-color: #fff;
 }
 
 .header-title {
@@ -371,4 +408,251 @@ a:focus {
 		padding: 1em;
 		background: rgba(250, 244, 230, 0.92);
 	}
+}
+
+/* Photo credits and galleries */
+
+.credit {
+	display: block;
+	margin-top: 0.4em;
+	font-size: 0.8em;
+	font-style: normal;
+	opacity: 0.7;
+}
+
+.credit a {
+	color: inherit;
+	text-decoration: underline;
+	text-decoration-color: rgba(128, 128, 128, 0.4);
+}
+
+.gallery {
+	display: grid;
+	grid-template-columns: 3fr 2fr;
+	gap: 10px;
+	align-items: start;
+}
+
+/* ------------------------------------------------------------------ */
+/* Time of day. js/story.js sets <body data-time="night|morning|day">  */
+/* from the section being read.                                        */
+/* ------------------------------------------------------------------ */
+
+/* The map canvas: same filter functions in every theme so it can fade */
+.container canvas {
+	transition: filter 1.4s ease;
+	filter: invert(0) hue-rotate(0deg) sepia(0) hue-rotate(0deg) saturate(1) brightness(1);
+}
+
+body[data-time="morning"] .container canvas {
+	filter: invert(0) hue-rotate(-8deg) sepia(0.35) hue-rotate(0deg) saturate(1.35) brightness(1.02);
+}
+
+body[data-time="night"] .container canvas {
+	/* invert turns the light map dark; sepia + a second hue-rotate tint it night blue */
+	filter: invert(0.92) hue-rotate(180deg) sepia(0.55) hue-rotate(185deg) saturate(1.5) brightness(0.9);
+}
+
+/* A sky layer between the map and the text */
+.sky {
+	position: fixed;
+	z-index: 0;
+	inset: 0;
+	pointer-events: none;
+}
+
+.sky::before,
+.sky::after {
+	content: '';
+	position: absolute;
+	inset: 0;
+	opacity: 0;
+	transition: opacity 1.4s ease;
+}
+
+/* morning: warm light from the east */
+.sky::before {
+	background: linear-gradient(200deg, rgba(255, 196, 140, 0.55), rgba(255, 222, 180, 0.15) 45%, rgba(255, 255, 255, 0) 70%);
+	mix-blend-mode: multiply;
+}
+
+/* night: deep blue with a few stars */
+.sky::after {
+	background:
+		radial-gradient(1.2px 1.2px at 72% 12%, rgba(255, 255, 255, 0.9), transparent 60%),
+		radial-gradient(1px 1px at 85% 30%, rgba(255, 255, 255, 0.8), transparent 60%),
+		radial-gradient(1.4px 1.4px at 92% 8%, rgba(255, 255, 255, 0.9), transparent 60%),
+		radial-gradient(1px 1px at 63% 26%, rgba(255, 255, 255, 0.7), transparent 60%),
+		radial-gradient(1.2px 1.2px at 78% 52%, rgba(255, 255, 255, 0.6), transparent 60%),
+		radial-gradient(1px 1px at 96% 44%, rgba(255, 255, 255, 0.7), transparent 60%),
+		radial-gradient(1px 1px at 58% 6%, rgba(255, 255, 255, 0.8), transparent 60%),
+		linear-gradient(rgba(10, 16, 34, 0.35), rgba(10, 16, 34, 0.1));
+}
+
+body[data-time="morning"] .sky::before,
+body[data-time="night"] .sky::after {
+	opacity: 1;
+}
+
+/* Text colours follow the time of day */
+.text section,
+.text .title-down,
+.text .title-up,
+.text p.text-intro,
+.text figcaption,
+.text blockquote,
+.text blockquote span {
+	transition: color 1.2s ease, background-color 1.2s ease;
+}
+
+body[data-time="night"] .text section {
+	color: #e6e0cf;
+}
+
+body[data-time="night"] .text .title-down {
+	color: #f4ecd6;
+}
+
+body[data-time="night"] .text .title-up {
+	color: #e0b860;
+}
+
+body[data-time="night"] .text p.text-intro {
+	color: #c9bd9c;
+}
+
+body[data-time="night"] .text figcaption {
+	color: #b9b3a3;
+}
+
+body[data-time="night"] .text blockquote {
+	color: #a9c2b8;
+}
+
+body[data-time="night"] .text blockquote::before {
+	color: #34405a;
+}
+
+body[data-time="night"] .text a {
+	color: #8fd1bb;
+}
+
+body[data-time="morning"] .text .title-up {
+	color: #c0702e;
+}
+
+body[data-time="morning"] .text p.text-intro {
+	color: #a0704a;
+}
+
+/* ------------------------------------------------------------------ */
+/* Arabic (right to left)                                              */
+/* ------------------------------------------------------------------ */
+
+html[dir="rtl"] body {
+	font-family: var(--arabic);
+}
+
+html[dir="rtl"] .lang-switch {
+	right: auto;
+	left: 1.5em;
+	font-family: var(--serif);
+}
+
+html[dir="rtl"] .photo-credit-header {
+	right: auto;
+	left: 1.5em;
+}
+
+html[dir="rtl"] .header-title__main {
+	font-family: var(--arabic);
+	font-weight: 700;
+	line-height: 1.3;
+}
+
+html[dir="rtl"] .header-title__part,
+html[dir="rtl"] .title-up {
+	letter-spacing: 0;
+	text-indent: 0;
+}
+
+html[dir="rtl"] .header-title__sub {
+	font-size: 0.6em;
+}
+
+html[dir="rtl"] .intro {
+	font-family: var(--arabic);
+}
+
+html[dir="rtl"] .text section {
+	font-size: 1.3em;
+	line-height: 1.9;
+}
+
+html[dir="rtl"] .text section h2 {
+	text-align: right;
+}
+
+html[dir="rtl"] .title-up {
+	font-family: var(--arabic);
+	font-size: 0.45em;
+}
+
+html[dir="rtl"] .title-down {
+	font-family: var(--arabic);
+	font-weight: 700;
+	line-height: 1.35;
+}
+
+html[dir="rtl"] .text section p.text-intro {
+	font-family: var(--arabic);
+	font-style: normal;
+	text-align: right;
+}
+
+html[dir="rtl"] .text blockquote {
+	font-family: var(--arabic);
+	text-align: right;
+	margin: 1.2em 1.5em 1.2em 0;
+}
+
+html[dir="rtl"] .text blockquote::before {
+	content: '\201D';
+	right: auto;
+	left: 100%;
+	margin: 0 0 0 0.075em;
+}
+
+html[dir="rtl"] .text blockquote span,
+html[dir="rtl"] .credit {
+	font-family: var(--sans);
+}
+
+html[dir="rtl"] .text figcaption {
+	font-style: normal;
+}
+
+html[dir="rtl"] .content--credits h3 {
+	font-family: var(--arabic);
+	font-weight: 700;
+}
+
+/* Mobile: the text sits on a panel over the map, so the panel changes too */
+@media (max-width: 720px) {
+	.js-section {
+		transition: background-color 1.2s ease;
+	}
+	body[data-time="night"] .js-section {
+		background: rgba(16, 23, 40, 0.92);
+	}
+	body[data-time="morning"] .js-section {
+		background: rgba(253, 239, 222, 0.93);
+	}
+	.gallery {
+		grid-template-columns: 1fr;
+	}
+}
+
+html[dir="rtl"] .text section p {
+	font-size: 1.08em;
 }

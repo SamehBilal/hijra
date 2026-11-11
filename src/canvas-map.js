@@ -419,7 +419,7 @@ const CanvasMap=(props)=>{
         this.state.height/zoom
       ]
       let center={
-        x:this.state.width>720?0.66:0.5,
+        x:this.state.width>720?(document.documentElement.dir=='rtl'?0.34:0.66):0.5 // text column on the right in RTL,
         y:0.33
       }
       return {
@@ -631,8 +631,8 @@ const CanvasMap=(props)=>{
 
       let drawLabel=(point,i)=>{
         let fontSize=15
-        this.ctx.font=`${setByStatus(i,'normal','bold')} ${(setByStatus(i,fontSize,fontSize*1.2))}px Georgia, serif`
-        this.ctx.textAlign='left'
+        this.ctx.font=`${setByStatus(i,'normal','bold')} ${(setByStatus(i,fontSize,fontSize*1.2))}px Georgia, Amiri, serif`
+        this.ctx.textAlign=document.documentElement.dir=='rtl'?'right':'left'
         this.ctx.textBaseline='middle'
         this.ctx.fillStyle=setByStatus(i,
           this.props.fontPastColor,
@@ -641,7 +641,7 @@ const CanvasMap=(props)=>{
         )
         this.ctx.strokeStyle='#FDFCEC'
         this.ctx.lineWidth=6
-        let pos=add(point,{x:20*inverseZoom,y:0})
+        let pos=add(point,{x:(document.documentElement.dir=='rtl'?-20:20)*inverseZoom,y:0})
         this.ctx.strokeText(point.label,...canvasPos(pos))
         this.ctx.fillText(point.label,...canvasPos(pos))
       }
@@ -783,7 +783,9 @@ const CanvasMap=(props)=>{
 
       let blendWorks=setCompositeOperation(this.ctx,'screen')
 
-      let gradient=this.ctx.createLinearGradient(this.sectionsBounds[0].right,0,this.sectionsBounds[0].right+200,0)
+      let rtl=document.documentElement.dir=='rtl'
+      let textEdge=rtl?this.sectionsBounds[0].left:this.sectionsBounds[0].right
+      let gradient=this.ctx.createLinearGradient(textEdge,0,textEdge+(rtl?-200:200),0)
       if(blendWorks){
         gradient.addColorStop(0,'rgba(250, 244, 230, 1)')
         gradient.addColorStop(1,"rgba(250, 244, 230, 0)")
@@ -795,7 +797,8 @@ const CanvasMap=(props)=>{
 
       // this.ctx.fillStyle='rgba(250, 244, 230, 1)'
 
-      this.ctx.fillRect(0,0,this.sectionsBounds[0].right+200,this.state.height)
+      if(rtl) this.ctx.fillRect(textEdge-200,0,this.state.width,this.state.height)
+      else this.ctx.fillRect(0,0,textEdge+200,this.state.height)
 
       if(blendWorks)
         setCompositeOperation(this.ctx)

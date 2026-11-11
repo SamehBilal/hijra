@@ -36,6 +36,13 @@ const P = ([lon, lat]) => [X(lon), Y(lat)]
 const W = Math.round((LON1 - LON0) * KX * S)
 const H = Math.round((LAT0 - LAT1) * KY * S)
 
+// ---- language -------------------------------------------------------------
+// node tools/build-map.js            -> img/map.svg and img/map-ar.svg
+// node tools/build-map.js --lang=ar  -> only img/map-ar.svg
+const AR = process.argv.includes('--lang=ar')
+const t = (en, ar) => AR ? ar : en
+const ARABIC_FONT = "'Amiri', 'Traditional Arabic', serif"
+
 // ---- the story ------------------------------------------------------------
 // Stops, in order. [id, lon, lat, stay]
 const STOPS = [
@@ -47,6 +54,11 @@ const STOPS = [
   ['Quba',        39.6173, 24.4393, true ],
   ['Al-Madinah',  39.6112, 24.4672, true ],
 ]
+// Arabic stop names (the circle id becomes the label on the map)
+const STOP_AR = {
+  'Makkah': 'مكة', 'Ghar_Thawr': 'غار_ثور', 'Usfan': 'عسفان', 'Qudayd': 'قديد',
+  'Al-Arj': 'العرج', 'Quba': 'قباء', 'Al-Madinah': 'المدينة',
+}
 const stop = id => { const s = STOPS.find(s => s[0] === id); return [s[1], s[2]] }
 
 // Route through the classical stations (Ibn Ishaq): down to the coast below
@@ -109,8 +121,8 @@ const C = {
 
 // Reference places that are NOT story stops (faint, for orientation)
 const TOWNS = [
-  ['Jeddah', 39.18, 21.50], ['Ta\'if', 40.42, 21.27], ['Badr', 38.78, 23.73],
-  ['Yanbu', 38.08, 24.09], ['Al-Juhfa', 39.14, 22.71], ['Khaybar', 39.29, 25.70],
+  [t('Jeddah', 'جدة'), 39.18, 21.50], [t('Ta\'if', 'الطائف'), 40.42, 21.27], [t('Badr', 'بدر'), 38.78, 23.73],
+  [t('Yanbu', 'ينبع'), 38.08, 24.09], [t('Al-Juhfa', 'الجحفة'), 39.14, 22.71], [t('Khaybar', 'خيبر'), 39.29, 25.70],
 ]
 
 // Mountain ridge (Sarawat / Hijaz escarpment), drawn as little peaks
@@ -180,7 +192,7 @@ function compass(lon, lat) {
     <path d="M0,-58 L8,0 L0,58 L-8,0 Z" fill="${C.seaDeep}"/>
     <path d="M-58,0 L0,-6 L58,0 L0,6 Z" fill="${C.seaDeep}"/>
     <path d="M0,-58 L8,0 L-8,0 Z" fill="${C.textSea}"/>
-    <text y="-66" text-anchor="middle" font-family="Georgia, serif" font-size="16" fill="${C.textSea}" stroke="none">N</text>
+    <text y="-66" text-anchor="middle" font-family="Georgia, serif" font-size="16" fill="${C.textSea}" stroke="none">${t('N', 'ش')}</text>
   </g>`
 }
 
@@ -190,7 +202,7 @@ function scaleBar(lon, lat) {
   const len = 100 / 111.0 * KY * S
   return `<g transform="translate(${x} ${y})" font-family="Georgia, serif" font-size="13" fill="${C.text}">
     <rect width="${len / 2}" height="5" fill="${C.text}"/><rect x="${len / 2}" width="${len / 2}" height="5" fill="none" stroke="${C.text}"/>
-    <text y="-8">0</text><text x="${len}" y="-8" text-anchor="middle">100 km</text></g>`
+    <text y="-8">0</text><text x="${len}" y="-8" text-anchor="middle">${t('100 km', '١٠٠ كم')}</text></g>`
 }
 
 // ---- assemble ---------------------------------------------------------------
@@ -220,17 +232,23 @@ ${waves()}
 </g>
 ${harrah()}
 ${peaks()}
+${AR ? `
+${label('البحر الأحمر', 38.2, 22.4, { size: 52, fill: C.textSea, rotate: -66, family: ARABIC_FONT })}
+${label('الحجاز', 41.05, 23.0, { size: 64, fill: '#e3d4b1', rotate: -68, family: ARABIC_FONT })}
+${label('تهامة', 38.82, 22.25, { size: 26, fill: '#d6c49c', rotate: -68, family: ARABIC_FONT })}
+${label('حرة رهط', 40.15, 23.05, { size: 24, fill: C.harrahDot, rotate: -80, family: ARABIC_FONT })}
+${label('جبال السروات', 40.48, 21.75, { size: 22, fill: C.mountain, rotate: -66, family: ARABIC_FONT })}` : `
 ${label('R E D &#160; S E A', 38.15, 22.55, { size: 40, fill: C.textSea, rotate: -66, spacing: 6, style: 'italic' })}
-${label('البحر الأحمر', 38.45, 21.55, { size: 26, fill: C.textSea, rotate: -66, family: "'Amiri', 'Traditional Arabic', serif" })}
+${label('البحر الأحمر', 38.45, 21.55, { size: 26, fill: C.textSea, rotate: -66, family: ARABIC_FONT })}
 ${label('A L - H I J A Z', 40.95, 23.25, { size: 44, fill: '#e3d4b1', rotate: -68, spacing: 10 })}
-${label('الحجاز', 41.35, 22.35, { size: 34, fill: '#e3d4b1', rotate: -68, family: "'Amiri', 'Traditional Arabic', serif" })}
+${label('الحجاز', 41.35, 22.35, { size: 34, fill: '#e3d4b1', rotate: -68, family: ARABIC_FONT })}
 ${label('T I H A M A H', 38.82, 22.25, { size: 18, fill: '#d6c49c', rotate: -68, spacing: 4 })}
 ${label('Harrat Rahat', 40.15, 23.05, { size: 16, fill: C.harrahDot, rotate: -80, style: 'italic' })}
-${label('Sarawat Mountains', 40.48, 21.75, { size: 15, fill: C.mountain, rotate: -66, style: 'italic' })}
+${label('Sarawat Mountains', 40.48, 21.75, { size: 15, fill: C.mountain, rotate: -66, style: 'italic' })}`}
 <g fill="${C.town}">
 ${TOWNS.map(([n, lon, lat]) => `  <circle cx="${X(lon)}" cy="${Y(lat)}" r="3.2"/>`).join('\n')}
 </g>
-${TOWNS.map(([n, lon, lat]) => label(n, lon, lat, { size: 13, fill: C.town, anchor: 'end', family: 'Arial, sans-serif' }).replace(/x="([\d.]+)" y="([\d.]+)"/, (m, x, y) => `x="${(+x - 8).toFixed(1)}" y="${(+y + 4).toFixed(1)}"`)).join('\n')}
+${TOWNS.map(([n, lon, lat]) => label(n, lon, lat, { size: AR ? 17 : 13, fill: C.town, anchor: 'end', family: AR ? ARABIC_FONT : 'Arial, sans-serif' }).replace(/x="([\d.]+)" y="([\d.]+)"/, (m, x, y) => `x="${(+x - 8).toFixed(1)}" y="${(+y + 4).toFixed(1)}"`)).join('\n')}
 ${compass(37.95, 20.85)}
 ${scaleBar(41.4, 20.65)}
 <g id="trail-path" display="none">
@@ -240,13 +258,14 @@ ${scaleBar(41.4, 20.65)}
   <path display="inline" fill="none" stroke="#EC2227" stroke-width="3" d="${cameraD}"/>
 </g>
 <g id="points" display="none">
-${STOPS.map(([id, lon, lat, stay]) => `  <circle id="${id}"${stay ? ' data-stay="true"' : ''} display="inline" fill="#0f6b55" cx="${X(lon)}" cy="${Y(lat)}" r="6"/>`).join('\n')}
+${STOPS.map(([id, lon, lat, stay]) => `  <circle id="${AR ? STOP_AR[id] : id}"${stay ? ' data-stay="true"' : ''} display="inline" fill="#0f6b55" cx="${X(lon)}" cy="${Y(lat)}" r="6"/>`).join('\n')}
 </g>
 </svg>
 `
 
-fs.writeFileSync(path.join(ROOT, 'img', 'map.svg'), svg)
-console.log(`img/map.svg written: ${W} x ${H}px, ${(svg.length / 1024).toFixed(0)} KB`)
+const OUT = AR ? 'map-ar.svg' : 'map.svg'
+fs.writeFileSync(path.join(ROOT, 'img', OUT), svg)
+console.log(`img/${OUT} written: ${W} x ${H}px, ${(svg.length / 1024).toFixed(0)} KB`)
 
 // Debug preview: same map with the hidden layers made visible
 if (process.argv.includes('--debug')) {
@@ -256,6 +275,11 @@ if (process.argv.includes('--debug')) {
     .replace(/<g id="points" display="none">/, '<g id="points">')
     .replace(/stroke="#b39a6a" stroke-width="2"/, 'stroke="#b39a6a" stroke-width="3" stroke-dasharray="6 6"')
     .replace('</svg>', STOPS.map(([id, lon, lat]) => label(id, lon, lat, { size: 14, fill: '#0f6b55', anchor: 'start', family: 'Arial' }).replace(/x="([\d.]+)"/, (m, x) => `x="${+x + 10}"`)).join('\n') + '\n</svg>')
-  fs.writeFileSync(path.join(ROOT, 'tools', 'map-debug.svg'), dbg)
-  console.log('tools/map-debug.svg written')
+  fs.writeFileSync(path.join(ROOT, 'tools', AR ? 'map-debug-ar.svg' : 'map-debug.svg'), dbg)
+  console.log(`tools/${AR ? 'map-debug-ar.svg' : 'map-debug.svg'} written`)
+}
+
+// Build the Arabic map too, unless this run was already the Arabic one
+if (!AR) {
+  require('child_process').execFileSync(process.execPath, [__filename, '--lang=ar', ...process.argv.slice(2)], { stdio: 'inherit' })
 }

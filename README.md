@@ -18,18 +18,22 @@ Then open http://localhost:8080. Any static host (for example GitHub Pages) also
 
 | File | What it is |
 |---|---|
-| `index.html` | The story. Each `<section class="js-section">` is one leg of the journey. |
-| `css/style.css` | Styles |
-| `img/map.svg` | The map. Generated, so don't edit it by hand. |
-| `tools/build-map.js` | Builds `img/map.svg`: stops, route, labels and decoration |
+| `index.html` | The story in English. Each `<section class="js-section">` is one leg of the journey. |
+| `ar.html` | The story in Arabic (right to left), with the same sections |
+| `css/style.css` | Styles, including the night/morning/day themes and the right-to-left layout |
+| `js/story.js` | Switches the time of day as you scroll, and re-measures the page once fonts and photos load |
+| `img/map.svg`, `img/map-ar.svg` | The English and Arabic maps. Both are generated, so don't edit them by hand. |
+| `tools/build-map.js` | Builds both maps: stops, route, labels and decoration |
 | `tools/ksa-provinces.json` | Province outlines taken from the KSA Map SVG |
-| `img/story/*.svg`, `img/caravan.svg` | Illustrations and the travel marker |
+| `img/photos/*.jpg` | Photos from Wikimedia Commons, credited under each picture on the page |
+| `img/caravan.svg` | The travel marker |
 | `dist/app.js` | The template's map script (bundled) |
 | `src/` | Source for `dist/app.js` |
 
 ## Editing the story
 
-**Text and images:** edit `index.html`. On a section:
+**Text and images:** edit `index.html` and `ar.html`, and keep their sections in the same order. On a section:
+- `data-time="night"`, `"morning"` or `"day"` sets the theme while that section is being read. At night the map turns dark blue and the text turns light.
 - `data-zoom-start` / `data-zoom-middle` set the map zoom at the start and middle of the section.
 - `data-icon="img/caravan.svg"` shows the travel marker at the tip of the route.
 - `<img class="js-image" data-pos="0.5">` draws a pointer from the image to that point (0 to 1) along the section's leg.
@@ -40,7 +44,7 @@ Then open http://localhost:8080. Any static host (for example GitHub Pages) also
 node tools/build-map.js --debug
 ```
 
-`--debug` also writes `tools/map-debug.svg`, which shows the hidden route and stops so you can check them.
+This builds `img/map.svg` and `img/map-ar.svg`. The Arabic stop names are in `STOP_AR`. `--debug` also writes `tools/map-debug.svg` and `tools/map-debug-ar.svg`, which show the hidden route and stops so you can check them.
 
 Each stop gets one section in `index.html`. A stop with `stay: true` gets two: one that stays on the stop and one that travels on to the next stop. The current order is:
 
@@ -64,5 +68,7 @@ These are applied in both `dist/app.js` and `src/`:
 - A stop's "stay" comes from `data-stay` on its circle in the map. The original read it from the section with the same index, which breaks once you have more than one stay.
 - Finding where a stop sits on the route now scans the whole path. The original search could match a stop to the wrong part of a long route.
 - Colours and the label font now match the map's desert palette.
+- Each page can choose its own map with `<body data-map="...">`.
+- On a right-to-left page (`<html dir="rtl">`) the map is mirrored: the camera centres on the left, labels sit to the left of each stop, and the text-panel fade is drawn on the right.
 
 Rebuilding `dist/app.js` from `src/` (`npm install && npm run build`) needs the template's old webpack 1 and Babel 6 toolchain. You don't need to rebuild it to edit the story.
