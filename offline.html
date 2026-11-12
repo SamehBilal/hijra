@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Offline — The Hijra</title>
+	<meta name="robots" content="noindex">
+	<link rel="icon" href="img/icons/favicon.svg" type="image/svg+xml">
+	<link rel="icon" href="img/icons/favicon-32.png" type="image/png" sizes="32x32">
+	<link rel="apple-touch-icon" href="img/icons/apple-touch-icon.png" sizes="180x180">
+	<link rel="manifest" href="manifest.webmanifest">
+	<meta name="theme-color" content="#0b1426">
+	<meta name="color-scheme" content="dark">
+	<style>
+		:root { --night: #0b1426; --paper: #f4ecd6; --dim: #b9b3a3; --gold: #e9cf8f; }
+		* { box-sizing: border-box; }
+		body { margin: 0; min-height: 100vh; display: grid; place-items: center; padding: 24px 16px; text-align: center;
+			color: var(--paper); font-family: 'Source Sans 3', 'Segoe UI', Arial, sans-serif;
+			background: radial-gradient(1.4px 1.4px at 20% 18%, #fff, transparent 60%), radial-gradient(1px 1px at 72% 12%, #fff, transparent 60%),
+				radial-gradient(1.2px 1.2px at 86% 34%, #fff, transparent 60%), radial-gradient(1px 1px at 35% 40%, #fff, transparent 60%),
+				linear-gradient(var(--night), #1b2a48 70%, #3a3350); }
+		.moon { width: 84px; height: 84px; margin: 0 auto 26px; border-radius: 50%; box-shadow: -22px 10px 0 0 var(--gold); transform: translateX(14px); }
+		h1 { font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 500; font-size: 40px; margin: 0 0 10px; }
+		.ar { font-family: 'Amiri', 'Traditional Arabic', serif; direction: rtl; }
+		h1.ar { font-size: 36px; margin-top: 18px; }
+		p { color: var(--dim); max-width: 34rem; margin: 0 auto 8px; line-height: 1.7; }
+		p.ar { font-size: 19px; }
+		.btns { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-top: 26px; }
+		a, button { font: inherit; border-radius: 999px; padding: 10px 22px; cursor: pointer; text-decoration: none; }
+		button { background: var(--paper); color: var(--night); border: 0; }
+		a { color: var(--paper); border: 1px solid rgba(244, 236, 214, .35); }
+	</style>
+</head>
+<body>
+	<main>
+		<div class="moon" aria-hidden="true"></div>
+		<h1>You’re offline</h1>
+		<p>This page hasn’t been saved on this device yet. The story itself works offline once you have opened it here.</p>
+		<h1 class="ar" lang="ar">لا يوجد اتصال</h1>
+		<p class="ar" lang="ar">هذه الصفحة لم تُحفظ على جهازك بعد. أما القصة نفسها فتعمل دون إنترنت بعد أن تفتحها مرة.</p>
+		<div class="btns">
+			<button type="button" onclick="location.reload()">Retry · حاول مجددًا</button>
+			<a href="index.html">English</a>
+			<a href="ar.html" lang="ar">العربية</a>
+		</div>
+	</main>
+</body>
+</html>

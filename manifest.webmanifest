@@ -1,0 +1,135 @@
+{
+	"id": "./",
+	"name": "The Hijra — الهجرة النبوية",
+	"short_name": "The Hijra",
+	"description": "An interactive map story of the Hijra: the journey of the Prophet Muhammad ﷺ and Abu Bakr from Makkah to Al-Madinah in 622 CE, in English and Arabic, with real photos of each place. Works offline. — قصة تفاعلية على الخريطة لهجرة النبي ﷺ وصاحبه أبي بكر من مكة إلى المدينة، بالعربية والإنجليزية، وتعمل دون إنترنت.",
+	"lang": "en",
+	"dir": "ltr",
+	"start_url": "./index.html?source=pwa",
+	"scope": "./",
+	"display": "standalone",
+	"display_override": [
+		"standalone",
+		"minimal-ui"
+	],
+	"orientation": "any",
+	"background_color": "#0b1426",
+	"theme_color": "#0b1426",
+	"categories": [
+		"education",
+		"books",
+		"lifestyle"
+	],
+	"icons": [
+		{
+			"src": "img/icons/icon-192.png",
+			"sizes": "192x192",
+			"type": "image/png",
+			"purpose": "any"
+		},
+		{
+			"src": "img/icons/icon-512.png",
+			"sizes": "512x512",
+			"type": "image/png",
+			"purpose": "any"
+		},
+		{
+			"src": "img/icons/maskable-192.png",
+			"sizes": "192x192",
+			"type": "image/png",
+			"purpose": "maskable"
+		},
+		{
+			"src": "img/icons/maskable-512.png",
+			"sizes": "512x512",
+			"type": "image/png",
+			"purpose": "maskable"
+		},
+		{
+			"src": "img/icons/favicon.svg",
+			"sizes": "any",
+			"type": "image/svg+xml",
+			"purpose": "any"
+		}
+	],
+	"shortcuts": [
+		{
+			"name": "The story in English",
+			"short_name": "English",
+			"description": "From Makkah to Al-Madinah, in English",
+			"url": "./index.html?source=pwa",
+			"icons": [
+				{
+					"src": "img/icons/icon-192.png",
+					"sizes": "192x192",
+					"type": "image/png"
+				}
+			]
+		},
+		{
+			"name": "القصة بالعربية",
+			"short_name": "العربية",
+			"description": "The story in Arabic — من مكة إلى المدينة",
+			"url": "./ar.html?source=pwa",
+			"icons": [
+				{
+					"src": "img/icons/icon-192.png",
+					"sizes": "192x192",
+					"type": "image/png"
+				}
+			]
+		}
+	],
+	"screenshots": [
+		{
+			"src": "img/screens/wide-home.jpg",
+			"sizes": "1280x720",
+			"type": "image/jpeg",
+			"form_factor": "wide",
+			"label": "The Hijra — from Makkah to Al-Madinah"
+		},
+		{
+			"src": "img/screens/wide-cave.jpg",
+			"sizes": "1280x720",
+			"type": "image/jpeg",
+			"form_factor": "wide",
+			"label": "Ghar Thawr, at night: the map follows the story as you scroll"
+		},
+		{
+			"src": "img/screens/wide-qudayd.jpg",
+			"sizes": "1280x720",
+			"type": "image/jpeg",
+			"form_factor": "wide",
+			"label": "Qudayd, by day: Suraqa’s pursuit on the coastal road"
+		},
+		{
+			"src": "img/screens/wide-arabic.jpg",
+			"sizes": "1280x720",
+			"type": "image/jpeg",
+			"form_factor": "wide",
+			"label": "قباء — القصة بالعربية"
+		},
+		{
+			"src": "img/screens/narrow-home.jpg",
+			"sizes": "412x915",
+			"type": "image/jpeg",
+			"form_factor": "narrow",
+			"label": "The Hijra"
+		},
+		{
+			"src": "img/screens/narrow-arabic.jpg",
+			"sizes": "412x915",
+			"type": "image/jpeg",
+			"form_factor": "narrow",
+			"label": "الهجرة النبوية"
+		},
+		{
+			"src": "img/screens/narrow-quba.jpg",
+			"sizes": "412x915",
+			"type": "image/jpeg",
+			"form_factor": "narrow",
+			"label": "Quba — the first mosque"
+		}
+	],
+	"prefer_related_applications": false
+}

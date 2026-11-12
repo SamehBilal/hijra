@@ -656,3 +656,142 @@ html[dir="rtl"] .content--credits h3 {
 html[dir="rtl"] .text section p {
 	font-size: 1.08em;
 }
+
+/* ------------------------------------------------------------------ */
+/* App (js/pwa.js): install button and notices                         */
+/* ------------------------------------------------------------------ */
+
+.install-app {
+	position: absolute;
+	z-index: 2;
+	top: 1.5em;
+	right: 7.5em;
+	display: inline-flex;
+	align-items: center;
+	gap: 0.4em;
+	padding: 0.35em 0.9em;
+	border: 1px solid rgba(233, 207, 143, 0.6);
+	border-radius: 2em;
+	background: rgba(233, 207, 143, 0.12);
+	font: inherit;
+	font-size: 0.95em;
+	color: #e9cf8f;
+	cursor: pointer;
+}
+
+.install-app:hover,
+.install-app:focus-visible {
+	color: #fff;
+	border-color: #fff;
+}
+
+html[dir="rtl"] .install-app {
+	right: auto;
+	left: 7.5em;
+}
+
+.toast-stack {
+	position: fixed;
+	z-index: 2000;
+	bottom: 20px;
+	left: 50%;
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+	width: min(380px, calc(100vw - 32px));
+	transform: translateX(-50%);
+	pointer-events: none;
+}
+
+.toast {
+	position: relative;
+	padding: 14px 40px 14px 16px;
+	border-left: 5px solid #e9cf8f;
+	border-radius: 6px;
+	background: #13203a;
+	color: #f4ecd6;
+	box-shadow: 0 18px 30px -12px rgba(0, 0, 0, 0.55);
+	font-size: 15px;
+	line-height: 1.45;
+	pointer-events: auto;
+	animation: toast-in 0.35s ease;
+}
+
+html[dir="rtl"] .toast {
+	padding: 14px 16px 14px 40px;
+	border-left: 0;
+	border-right: 5px solid #e9cf8f;
+	font-family: var(--arabic);
+	font-size: 17px;
+}
+
+.toast p {
+	margin: 0;
+}
+
+.toast__title {
+	display: block;
+	margin-bottom: 2px;
+	font-size: 12px;
+	opacity: 0.7;
+}
+
+.toast--success {
+	border-color: #3f9c6d;
+}
+
+.toast--warning {
+	border-color: #d99a3c;
+}
+
+.toast__close {
+	position: absolute;
+	top: 6px;
+	right: 8px;
+	padding: 0;
+	border: 0;
+	background: none;
+	color: inherit;
+	font-size: 20px;
+	line-height: 1;
+	opacity: 0.6;
+	cursor: pointer;
+}
+
+html[dir="rtl"] .toast__close {
+	right: auto;
+	left: 8px;
+}
+
+.toast__action {
+	margin-inline-start: 6px;
+	padding: 2px 10px;
+	border: 0;
+	border-radius: 2em;
+	background: #e9cf8f;
+	color: #13203a;
+	font: inherit;
+	font-weight: 600;
+	cursor: pointer;
+}
+
+.toast--out {
+	opacity: 0;
+	transform: translateY(8px);
+	transition: opacity 0.3s, transform 0.3s;
+}
+
+@keyframes toast-in {
+	from { opacity: 0; transform: translateY(12px); }
+	to { opacity: 1; transform: none; }
+}
+
+@media (max-width: 720px) {
+	.install-app {
+		top: 4.2em;
+		right: 1.5em;
+	}
+	html[dir="rtl"] .install-app {
+		left: 1.5em;
+	}
+}

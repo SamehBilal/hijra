@@ -29,6 +29,14 @@ Then open http://localhost:8080. Any static host (for example GitHub Pages) also
 | `img/caravan.svg` | The travel marker |
 | `dist/app.js` | The template's map script (bundled) |
 | `src/` | Source for `dist/app.js` |
+| `manifest.webmanifest` | The app: name, icons, shortcuts (English, Arabic) and install screenshots |
+| `sw.js` | Service worker: saves the whole story on the first visit so it works offline |
+| `js/pwa.js` | Install button, "update now" notice, offline notices, and the browser bar's colour per time of day |
+| `offline.html` | Shown for a page that isn't saved yet while offline |
+| `img/icons/` | App icons. Edit `icon.svg`, `maskable.svg` or `favicon.svg`; the PNGs are generated. |
+| `img/screens/`, `img/og/` | Install screenshots and link-share images, generated from the real pages |
+| `tools/build-images.js` | Renders the icon PNGs, screenshots and share images with headless Edge or Chrome |
+| `tools/build-sw.js` | Writes the service worker's file list and version |
 
 ## Editing the story
 
@@ -61,6 +69,26 @@ Each stop gets one section in `index.html`. A stop with `stay: true` gets two: o
 | 9 | (continued) | Quba → Al-Madinah |
 | 10 | Al-Madinah | stays at Al-Madinah |
 | 11 | Epilogue | zooms out over the whole route |
+
+## The app (PWA)
+
+The story installs as an app and works offline after the first visit. After changing any file, run:
+
+```bash
+node tools/build-sw.js
+```
+
+This updates the service worker's version, so people who installed the app get an "Update now" notice.
+
+If the pages change how they look, re-render the screenshots and share images (and the icon PNGs if you edited their SVGs). This uses Edge or Chrome, whichever is installed:
+
+```bash
+node tools/build-images.js
+```
+
+You can also pass `icons`, `screens` or `og` to render only those. Which sections are photographed is listed in `SCREENS` at the top of the script. Run `tools/build-sw.js` afterwards.
+
+The share tags (Open Graph, Twitter, JSON-LD) and the canonical and language links are at the top of each page, between `<!-- share -->` and `<!-- /share -->`. They use the full address https://samehbilal.github.io/hijra/.
 
 ## Changes to the template script
 
