@@ -21,7 +21,7 @@ Then open http://localhost:8080. Any static host (for example GitHub Pages) also
 | `index.html` | The story in English. Each `<section class="js-section">` is one leg of the journey. |
 | `ar.html` | The story in Arabic (right to left), with the same sections |
 | `css/style.css` | Styles, including the night/morning/day themes and the right-to-left layout |
-| `js/story.js` | Switches the time of day as you scroll, and re-measures the page once fonts and photos load |
+| `js/story.js` | Switches the time of day as you scroll, shows the map band on phones, and re-measures the page once fonts and photos load |
 | `img/map.svg`, `img/map-ar.svg` | The English and Arabic maps. Both are generated, so don't edit them by hand. |
 | `tools/build-map.js` | Builds both maps: stops, route, labels and decoration |
 | `tools/ksa-provinces.json` | Province outlines taken from the KSA Map SVG |
@@ -97,6 +97,7 @@ These are applied in both `dist/app.js` and `src/`:
 - Finding where a stop sits on the route now scans the whole path. The original search could match a stop to the wrong part of a long route.
 - Colours and the label font now match the map's desert palette.
 - Each page can choose its own map with `<body data-map="...">`.
+- On phones (720px wide or less) the map is shown as a band across the top 42% of the screen while the story is being read, and the text scrolls up underneath it. The camera centres the route inside the band, and the image pointers and the text-panel fade are left out there.
 - On a right-to-left page (`<html dir="rtl">`) the map is mirrored: the camera centres on the left, labels sit to the left of each stop, and the text-panel fade is drawn on the right.
 
 Rebuilding `dist/app.js` from `src/` (`npm install && npm run build`) needs the template's old webpack 1 and Babel 6 toolchain. You don't need to rebuild it to edit the story.

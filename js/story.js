@@ -5,13 +5,21 @@
 	// Time of day: each .js-section has data-time="night" | "morning" | "day".
 	// The section that has reached the middle of the screen sets the theme
 	// on <body data-time="...">; css/style.css does the rest.
+	// On phones the map is a band across the top of the screen (css/style.css), shown while
+	// the story itself is on screen: <body class="in-story">.
+	var BAND = 0.42
 	function updateTime() {
-		var line = window.innerHeight * 0.55
+		var phone = window.innerWidth <= 720
+		var line = window.innerHeight * (phone ? 0.7 : 0.55)
 		var time = 'night' // header and intro are at night
 		for (var i = 0; i < sections.length; i++) {
 			if (sections[i].getBoundingClientRect().top < line) time = sections[i].getAttribute('data-time') || time
 		}
 		if (document.body.getAttribute('data-time') !== time) document.body.setAttribute('data-time', time)
+
+		var bandEdge = window.innerHeight * BAND
+		var first = sections[0].getBoundingClientRect(), last = sections[sections.length - 1].getBoundingClientRect()
+		document.body.classList.toggle('in-story', first.top < bandEdge && last.bottom > bandEdge)
 	}
 	window.addEventListener('scroll', updateTime, { passive: true })
 	window.addEventListener('resize', updateTime)

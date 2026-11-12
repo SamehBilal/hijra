@@ -40,7 +40,7 @@ const SCREENS = [
   ['wide-qudayd.jpg', 'index.html', 4, 0.3, 1280, 720, false],
   ['wide-arabic.jpg', 'ar.html', 7, 0.25, 1280, 720, false],
   ['narrow-home.jpg', 'index.html', -1, 0, 412, 915, true],
-  ['narrow-arabic.jpg', 'ar.html', -1, 0, 412, 915, true],
+  ['narrow-arabic.jpg', 'ar.html', 1, 0.3, 412, 915, true],
   ['narrow-quba.jpg', 'index.html', 7, 0.22, 412, 915, true],
 ]
 const OG = [

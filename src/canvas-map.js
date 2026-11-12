@@ -420,7 +420,8 @@ const CanvasMap=(props)=>{
       ]
       let center={
         x:this.state.width>720?(document.documentElement.dir=='rtl'?0.34:0.66):0.5 // text column on the right in RTL,
-        y:0.33
+        // phones show the map in a band across the top of the screen (css/style.css): centre it there
+        y:this.state.width>720?0.33:0.21
       }
       return {
         x:(cameraPos.x-(width*center.x)),
@@ -564,7 +565,8 @@ const CanvasMap=(props)=>{
       }
 
       let drawImagePointers=()=>{
-        this.imagesBounds[this.state.sectionIndex].forEach(drawImagePointer)
+        // (not on phones: the map is only a band at the top there)
+        if(this.state.width>720) this.imagesBounds[this.state.sectionIndex].forEach(drawImagePointer)
       }
 
       let drawSubdividedPath=(path,interval=1,end=-1)=>{
@@ -797,7 +799,9 @@ const CanvasMap=(props)=>{
 
       // this.ctx.fillStyle='rgba(250, 244, 230, 1)'
 
-      if(rtl) this.ctx.fillRect(textEdge-200,0,this.state.width,this.state.height)
+      // (phones have no text column beside the map, so no fade)
+      if(this.state.width<=720) {}
+      else if(rtl) this.ctx.fillRect(textEdge-200,0,this.state.width,this.state.height)
       else this.ctx.fillRect(0,0,textEdge+200,this.state.height)
 
       if(blendWorks)

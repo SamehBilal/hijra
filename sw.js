@@ -2,11 +2,13 @@
    - Pages: network first (3 s), then the saved copy, then offline.html.
    - The story's own files (code, styles, maps, photos) are saved at install, so the whole
      story reads offline after the first visit.
-   - Images: from the cache once seen. Google Fonts: from the cache, refreshed in the background.
+   - Everything is served from this version's saved copy first; a new version (see VERSION)
+     replaces all saved copies when it takes over, so an update never mixes old and new files.
+   - Other images: from the cache once seen. Google Fonts: from the cache, refreshed in the background.
    VERSION and PRECACHE are rewritten by tools/build-sw.js — run it after changing files. */
 'use strict';
 
-var VERSION = 'hijra-642d884a22';
+var VERSION = 'hijra-53cdfb8636';
 var PRECACHE = [
 	'./',
 	'ar.html',
@@ -59,7 +61,8 @@ self.addEventListener('install', function (ev) {
 
 self.addEventListener('activate', function (ev) {
 	ev.waitUntil(caches.keys().then(function (keys) {
-		return Promise.all(keys.filter(function (k) { return k.indexOf('hijra-shell-') === 0 && k !== SHELL; }).map(function (k) { return caches.delete(k); }));
+		/* a new version replaces every saved copy of the story's files (the fonts stay) */
+		return Promise.all(keys.filter(function (k) { return k.indexOf('hijra-') === 0 && k !== SHELL && k !== FONTS; }).map(function (k) { return caches.delete(k); }));
 	}).then(function () { return self.clients.claim(); }));
 });
 
@@ -74,6 +77,11 @@ function timeout(ms, p) {
 	});
 }
 
+/* this version's copy of one of the story's files, saved at install */
+function fromShell(req) {
+	return caches.open(SHELL).then(function (c) { return c.match(req, { ignoreSearch: true }); });
+}
+
 function page(req) {
 	var net = fetch(req).then(function (res) {
 		if (res && res.ok) {
@@ -85,8 +93,10 @@ function page(req) {
 		return res;
 	});
 	return timeout(3000, net).catch(function () {
-		return caches.match(req, { ignoreSearch: true }).then(function (hit) {
-			return hit || net.catch(function () { return caches.match('offline.html'); });
+		return fromShell(req).then(function (hit) {
+			return hit || caches.match(req, { ignoreSearch: true });
+		}).then(function (hit) {
+			return hit || net.catch(function () { return fromShell('offline.html'); });
 		});
 	});
 }
@@ -104,7 +114,9 @@ function staleWhileRevalidate(req, cacheName) {
 }
 
 function cacheFirst(req, cacheName) {
-	return caches.match(req, { ignoreSearch: true }).then(function (hit) {
+	return fromShell(req).then(function (hit) {
+		return hit || caches.open(cacheName).then(function (c) { return c.match(req, { ignoreSearch: true }); });
+	}).then(function (hit) {
 		if (hit) return hit;
 		return fetch(req).then(function (res) {
 			if (res && (res.ok || res.type === 'opaque')) {
@@ -125,12 +137,9 @@ self.addEventListener('fetch', function (ev) {
 	if (req.mode === 'navigate') { ev.respondWith(page(req)); return; }
 	if (same && /\.(png|jpe?g|webp|gif|svg|ico)$/i.test(url.pathname)) { ev.respondWith(cacheFirst(req, IMAGES)); return; }
 	if (same) {
-		/* the latest copy fetched, else the install-time copy, refreshed quietly each time */
-		ev.respondWith(caches.open(RUNTIME).then(function (c) { return c.match(req, { ignoreSearch: true }); }).then(function (hit) {
-			return hit || caches.match(req, { ignoreSearch: true });
-		}).then(function (hit) {
-			var fresh = staleWhileRevalidate(req, RUNTIME);
-			return hit || fresh;
+		/* this version's copy, else the last one fetched (refreshed quietly each time) */
+		ev.respondWith(fromShell(req).then(function (hit) {
+			return hit || staleWhileRevalidate(req, RUNTIME);
 		}));
 		return;
 	}
